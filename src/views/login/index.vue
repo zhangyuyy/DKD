@@ -2,11 +2,11 @@
   <div class="login-container">
     <el-form
       ref="user"
-      :model="loginForm"
-      :rules="loginRules"
       class="login-form"
       auto-complete="on"
       label-position="left"
+      :model="loginForm"
+      :rules="loginRules"
     >
       <div class="title-container">
         <!-- 标题 -->
@@ -108,6 +108,26 @@ export default {
     this.getCode()
   },
   methods: {
+    // 点击登陆
+    async login() {
+      try {
+        this.loading = true
+        await this.$refs.user.validate()
+        console.log('成功')
+        const login = {
+          loginName: this.loginForm.loginName, //用户名
+          password: this.loginForm.password, //密码
+          code: this.loginForm.code, //验证码
+          clientToken: this.codeToken, //随机数赋值给clientToken
+          loginType: 0 //登录类型 0
+        }
+        await this.$store.dispatch('user/getLogin', login)
+        this.loading = false
+        this.$router.push('/')
+      } catch (e) {
+        console.log('失败')
+      }
+    },
     // 发送验证码
     async getCode() {
       // 随机数
@@ -116,23 +136,9 @@ export default {
       // 接口数据
       const res = await getverify(radomNum)
       console.log(res)
-      this.code = URL.createObjectURL(res.data)
+      this.code = URL.createObjectURL(res)
       // 把随机数赋值给clientToken
       this.codeToken = radomNum
-    },
-    // 点击登陆
-    async login() {
-      try {
-        await this.$refs.user.validate()
-        const login = {
-          loginName: this.loginForm.loginName, //用户名
-          password: this.loginForm.password, //密码
-          code: this.loginForm.code, //验证码
-          clientToken: this.codeToken, //随机数赋值给clientToken
-          loginType: 0 //登录类型 0
-        }
-        this.$store.dispatch('user/getLogin', login)
-      } catch (e) {}
     }
   }
 }
