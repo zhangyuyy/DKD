@@ -29,4 +29,10 @@ export const login = (data) => {
     data
   })
 }
+export const getUserInfoApi = (id) => {
+  return request({
+    url: `/user-service/user/${id}`,
+  })
+}
+
 

@@ -1,14 +1,19 @@
-import { login } from '@/api/user'
+import { login, getUserInfoApi } from '@/api/user'
 export default {
   namespaced: true,
   state: {
     // 登陆
-    list: {},
+    token: '',
+    // 获取用户信息
+    userInfo: {},
   },
   mutations: {
     // 登陆
     setLogin(state, payload) {
-      state.list = payload
+      state.token = payload
+    },
+    setUserInfo(state, payload) {
+      state.userInfo = payload
     }
   },
   actions: {
@@ -19,7 +24,16 @@ export default {
       const res = await login(payload)
       console.log(res);
 
-      context.commit('setLogin', res)
+      context.commit('setLogin', res.data)
+
+    },
+    async getUserInfo(context) {
+      const res = await getUserInfoApi(1)
+
+
+
+      console.log(res);
+      context.commit('setUserInfo', res)
 
     }
 
