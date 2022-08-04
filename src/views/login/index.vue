@@ -65,6 +65,7 @@
 
 <script>
 import { getverify } from '@/api/user'
+import { setTokenTime } from '@/utils/auth'
 
 export default {
   name: 'Login',
@@ -124,6 +125,7 @@ export default {
         await this.$store.dispatch('user/getLogin', login)
         this.loading = false
         this.$router.push('/')
+       setTokenTime()
       } catch (e) {
         console.log('失败')
       }
@@ -137,7 +139,7 @@ export default {
       const res = await getverify(radomNum)
       console.log(res)
       // 把随机数赋值给clientToken
-      this.code=res.request.responseURL
+      this.code = res.request.responseURL
       this.codeToken = radomNum
     }
   }

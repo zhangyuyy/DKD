@@ -93,7 +93,7 @@ export default {
     width: 240px;
     height: 100%;
     position: relative;
-    left: 1100px;
+    left: 1000px;
     color: #fff;
     // line-height: 60px;
     .avater {
