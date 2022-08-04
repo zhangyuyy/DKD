@@ -15,6 +15,7 @@ export default {
     setUserInfo(state, payload) {
       state.userInfo = payload
     }
+
   },
   actions: {
     // 登陆
@@ -27,13 +28,14 @@ export default {
       context.commit('setLogin', res.data)
 
     },
+    // 用户信息
     async getUserInfo(context) {
       const res = await getUserInfoApi(1)
 
 
 
-      console.log(res);
-      context.commit('setUserInfo', res)
+      console.log(res.data);
+      context.commit('setUserInfo', res.data)
 
     }
 

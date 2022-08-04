@@ -1,6 +1,5 @@
 <template>
   <div :class="{ 'has-logo': showLogo }">
-    <!-- <img src="http://likede2-admin.itheima.net/img/logo.3673fab5.png" alt="" /> -->
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
@@ -36,6 +35,7 @@ export default {
     routes() {
       return this.$router.options.routes
     },
+
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
@@ -57,3 +57,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.imgs {
+  background-color: #5373e0;
+}
+</style>

@@ -136,8 +136,8 @@ export default {
       // 接口数据
       const res = await getverify(radomNum)
       console.log(res)
-      this.code = URL.createObjectURL(res)
       // 把随机数赋值给clientToken
+      this.code=res.request.responseURL
       this.codeToken = radomNum
     }
   }
